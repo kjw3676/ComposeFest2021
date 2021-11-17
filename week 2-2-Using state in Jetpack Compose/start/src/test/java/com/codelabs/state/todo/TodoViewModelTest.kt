@@ -16,6 +16,24 @@
 
 package com.codelabs.state.todo
 
+import com.codelabs.state.util.generateRandomTodoItem
+import com.google.common.truth.Truth.assertThat
+import org.junit.Test
+
 class TodoViewModelTest {
-    // TODO: Write tests
+    @Test
+    fun whenRemovingItem_updatesList() {
+        // 데이터 준비
+        val viewModel = TodoViewModel()
+        val item1 = generateRandomTodoItem()
+        val item2 = generateRandomTodoItem()
+        viewModel.addItem(item1)
+        viewModel.addItem(item2)
+
+        // 메소드 실행 : 아이템 삭제
+        viewModel.removeItem(item1)
+
+        // 메소드 결과 : 남은 아이템이 예상되는 아이템과 같은가
+        assertThat(viewModel.todoItems).isEqualTo(listOf(item2))
+    }
 }
